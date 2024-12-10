@@ -5,6 +5,7 @@ import Header from "../components/Header";
 
 function Shopping() {
   const [products, setProducts] = useState([]);
+  const [cart, setCart] = useState([]);
   const [activeCategory, setActiveCategory] = useState("all");
   const categories = [
     { name: "all", label: "All" },
@@ -31,6 +32,13 @@ function Shopping() {
   };
 
   const filteredProducts = activeCategory === "all" ? products : products.filter((product) => product.category === activeCategory)
+
+  const addToCart = (product) => {
+    setCart((prevCart) => [...prevCart, product]);
+    console.log(cart);
+    //cart ja tem os produtos, agora precisa passar para o page cart. Possivelmente por um context, verificar
+  }
+
 
   return (
     <>
@@ -69,7 +77,7 @@ function Shopping() {
         <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
           <h2 className="sr-only">Products</h2>
           <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-            <Card products={filteredProducts}></Card>
+            <Card products={filteredProducts} addToCart={addToCart}></Card>
           </div>
         </div>
       </div>

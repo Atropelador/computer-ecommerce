@@ -1,4 +1,5 @@
-export default function Card({ products }) {
+export default function Card({ products, addToCart }) {
+
   return products?.map((product) => (
     <a key={product.id} href={product.href} className="flex justify-between flex-col border-2 border-solid rounded-lg border-orange-400 p-6">
       <img alt={product.title} src={product.image} className="mb-auto mt-auto self-center" />
@@ -8,7 +9,7 @@ export default function Card({ products }) {
           {product.price}
         </p>
         {/* button to add to cart */}
-        <button className="bg-orange-500 w-full p-1">Buy</button>
+        <button className="bg-orange-500 w-full p-1" onClick={() => addToCart(product)}>Buy</button>
       </div>
     </a>
   ));
