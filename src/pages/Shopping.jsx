@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Card from "../components/Card";
 import Header from "../components/Header";
-// import Categories from "../components/Categories";
 
 function Shopping() {
   const [products, setProducts] = useState([]);
@@ -14,7 +13,9 @@ function Shopping() {
     { name: "electronics", label: "Electronics" },
     { name: "jewelery", label: "Jewelery" },
   ];
+  const filteredProducts = activeCategory === "all" ? products : products.filter((product) => product.category === activeCategory)
 
+  //Integration
   useEffect(() => {
     fetch("https://fakestoreapi.com/products", { mode: "cors" })
       .then((response) => response.json())
@@ -31,12 +32,9 @@ function Shopping() {
     console.log(name);
   };
 
-  const filteredProducts = activeCategory === "all" ? products : products.filter((product) => product.category === activeCategory)
-
   const addToCart = (product) => {
     setCart((prevCart) => [...prevCart, product]);
     console.log(cart);
-    //cart ja tem os produtos, agora precisa passar para o page cart. Possivelmente por um context, verificar
   }
 
 
